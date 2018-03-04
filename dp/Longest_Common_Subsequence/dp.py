@@ -3,8 +3,7 @@
 
 def LCS(str1, str2, m, n):
     # init
-    dp = [[0]*(n+1)] * (m+1)
-
+    dp = [[0 for x in range(n+1)] for x in range(m+1)]
     for i in range(1, m+1):
         for j in range(1, n+1):
             if str1[i-1] == str2[j-1]:
