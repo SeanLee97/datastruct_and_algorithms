@@ -3,6 +3,7 @@
 ## 样例
 ### 输入
 source = 'pair'
+
 target = 'peer'
 ### 输出
 2
