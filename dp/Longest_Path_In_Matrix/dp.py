@@ -29,6 +29,7 @@ def f(mat):
     for i in range(n):
         for j in range(n):
             if dp[i][j] == -1:
+                # 从当前位置出发
                 _f(i, j, mat, dp)
             result = max(result, dp[i][j])
     return result

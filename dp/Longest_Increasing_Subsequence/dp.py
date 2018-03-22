@@ -6,8 +6,8 @@ def LIS(arr, m):
     dp = [1]*(m+1)
     # bottom-up
     for i in range(1, m):
-        curr_max = 1
         for j in range(i):
+            # j->i 代表过去的值
             if arr[j] < arr[i] and dp[j]+1 > dp[i]:
                 dp[i] = dp[j] + 1
     maximum = 0

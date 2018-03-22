@@ -19,6 +19,6 @@ def edit(str1, str2, m, n):
                 )
     return dp[m][n]
 
-src = 'pair'
-tgt = 'peer'
+src = 'geek'
+tgt = 'gesek'
 print(edit(src, tgt, len(src), len(tgt)))

@@ -19,6 +19,6 @@ def _LIS(arr, m):
     maximum = max(maximum, curr_max)
     return curr_max
 
-arr = [3, 10, 2, 5, 20]
+arr = [3, 10, 2, 15, 20]
 print(LIS(arr, len(arr)))
 
