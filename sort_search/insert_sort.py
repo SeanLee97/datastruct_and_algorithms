@@ -6,9 +6,9 @@
 def insert_sort(lst):
     n = len(lst)
     for i in range(n):
-        k = lst[i]
+        k = lst[i]  # 新选择的数
         j = i-1
-        while j>=0 and k < lst[j]:
+        while j>=0 and k < lst[j]:  # 和之前的数比较，放在合适的位置
             lst[j+1] = lst[j]
             j-=1
         lst[j+1] = k

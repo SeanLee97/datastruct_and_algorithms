@@ -10,9 +10,7 @@ def select_sort(lst):
             if lst[j] < minimum:
                 minimum = lst[j]
                 minidx = j
-        t = lst[i]
-        lst[i] = minimum
-        lst[minidx] = t
+        lst[i], lst[minidx] = lst[minidx], lst[i]
 
 lst = [3, 5, 1, 7, 2]
 select_sort(lst)

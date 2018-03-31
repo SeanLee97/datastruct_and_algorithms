@@ -8,4 +8,4 @@ def f(m, n):
         return 1
     return f(m-1, n) + f(m, n-1)
 
-print(f(20, 20))
+print(f(8, 6))

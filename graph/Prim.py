@@ -1,6 +1,8 @@
 # !/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+# Prim求最小生成树，图最好用邻接矩阵表示
+
 INF = 65535
 
 class Graph(object):
