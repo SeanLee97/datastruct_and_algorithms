@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 def _merge_sort(lst, low, mid, high):
+    # group
     n1 = mid - low + 1
     n2 = high - mid
     L = [0]*n1
