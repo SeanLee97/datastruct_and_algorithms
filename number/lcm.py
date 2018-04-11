@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# 最大公倍数 = a*b / gcd(a, b)
+# 最小公倍数 = a*b / gcd(a, b)
 
 def gcd(a, b):
     if b == 0:

@@ -10,8 +10,11 @@ class Node(object):
 def max_path_sum(root):
    if root == None:
        return 0
+   # 获取左结点的值
    l = max_path_sum(root.left)
+   # 右结点的值
    r = max_path_sum(root.right)
+   # 取当前结点和左右结点最大值+当前结点值的最大值
    lr_max = max(root.data, max(l, r) + root.data)
    m = max(lr_max, l+r+root.data)
    max_path_sum.maximum = max(max_path_sum.maximum, m)
