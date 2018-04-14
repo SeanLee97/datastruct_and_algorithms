@@ -2,20 +2,21 @@
 # -*- coding: utf-8 -*-
 
 # 堆排序
-def max_heap(lst, n, i):
-    # i为当前根节点
-    largest = i # 初始化最大值
-    L = 2*i + 1 # 左子树
-    R = 2*i + 2 # 右子树
+def max_heap(lst, n, root):
+    # root为当前根节点
+    largest = root # 初始化最大值
+    L = 2*root + 1 # 左子树
+    R = 2*root + 2 # 右子树
     # 判断左子树是否存在，且是否大于根
-    if L < n and  lst[L] > lst[i]:
+    if L < n and  lst[L] > lst[largest]:
         largest = L
     # 判断右子树是否存在，且是否大于根
     if R < n and lst[R] > lst[largest]:
         largest = R
     # 如果最大值的下标不等于当前根的下标那么交换两者的值
-    if largest != i:
-        lst[i], lst[largest] = lst[largest], lst[i]
+    if largest != root:
+        # 将较大值作为当前根的值
+        lst[root], lst[largest] = lst[largest], lst[root]
         # 由于一次调整后，堆仍然违反堆性质，所以需要递归的测试，使得整个堆都满足堆性质
         max_heap(lst, n, largest)
 

@@ -1,6 +1,7 @@
 # !/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import random
 # 时间复杂度Olog(n)
 # 空间复杂度O(1)  -> store_idx
 def quick_sort(lst, low, high):
@@ -11,6 +12,10 @@ def quick_sort(lst, low, high):
 
 def partition(lst, low, high):
     store_idx = low
+    # 选取最后一个元素作为基准，可能会出现最坏情况 
+    # pivot = lst[high]
+    rand_pivot_idx = random.randint(low, high)
+    lst[rand_pivot_idx], lst[high] = lst[high], lst[rand_pivot_idx]
     pivot = lst[high]
     for j in range(low, high):
         if lst[j] <= pivot:
