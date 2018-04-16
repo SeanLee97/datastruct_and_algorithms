@@ -15,7 +15,7 @@ def power(x, y):
        # 如果y是奇数，那么res = res * x
        if y & 1:
            res *= x
-       y = y>>1 # 右移一位（除2）
+       y >>= 1 # 右移一位（除2）
        x = x*x
     return res
 
