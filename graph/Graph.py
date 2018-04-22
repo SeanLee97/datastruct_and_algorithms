@@ -124,9 +124,9 @@ class Graph(object):
                 parent[xroot] = yroot
             
         # sort by weight ASC
-        edge = sorted(self.edge, key=lambda x: x[1])
-        elist = list(self.edge)
-
+        edge = sorted(self.edge.items(), key=lambda x: x[1])
+        elist = [e[0] for e in edge]
+         
         vertex = self.get_vertex_map()
         vdecode = self.get_vertex_map(reverse=False)
  
@@ -159,9 +159,39 @@ class Graph(object):
 
     # Prim 求解最小生成树
     def prim(self):
-        def min_dist(dists, visited):
-            pass
-                 
+        def min_dist(vsize, dist, visited):
+            u = -1
+            mindist = float('inf')
+            for i in range(vsize):
+                if not visited[i] and dist[i] < mindist:
+                    mindist = dist[i]
+                    u = i
+            return u
+       
+        vsize = len(self.vertex)
+        dist = [float('inf')]*vsize
+        visited = [False]*vsize
+        dist[0] = 0
+        # 记录父节点
+        parent = [None]*vsize
+        parent[0] = -1
+
+        matrix = self.get_matrix()
+        for i in range(vsize):
+            u = min_dist(vsize, dist, visited)
+            visited[u] = True
+
+            # 寻找下一结点，并选择距离小的结点
+            for v in range(vsize):
+                # matrix[u][v] > 0 保证了结点与当前结点是联通的
+                if not visited[v] and matrix[u][v] > 0 and dist[v] > matrix[u][v]:
+                    dist[v] = matrix[u][v]
+                    parent[v] = u   
+        vdecode = self.get_vertex_map(reverse=False) 
+        result = []
+        for i  in range(1, vsize):
+            result.append([vdecode[parent[i]], vdecode[i], matrix[i][parent[i]]])
+        return result
 
 if __name__ == '__main__':
     g = Graph(direction=False)
@@ -173,4 +203,5 @@ if __name__ == '__main__':
     print(g.get_list())
     #print(g.bfs('a'))
     #print(g.dfs())
-    print(g.kruskal()) 
+    print(g.kruskal())
+    print(g.prim()) 
