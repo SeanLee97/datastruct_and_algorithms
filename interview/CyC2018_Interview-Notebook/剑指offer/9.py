@@ -13,7 +13,7 @@ class Queue(object):
         self.instack.append(x)
     
     def pop(self):
-        if len(self.instack) > 0:
+        if len(self.instack) > 0 and len(self.outstack) == 0:
             for _ in range(len(self.instack)):
                 self.outstack.append(self.instack.pop())
         return self.outstack.pop()
