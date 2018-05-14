@@ -20,6 +20,8 @@ def solution(root):
 
 # 2. 循环方式
 def solution2(root):
+    if root == None:
+        return root
     prev = root
     curr = root.next
     prev.next = None
