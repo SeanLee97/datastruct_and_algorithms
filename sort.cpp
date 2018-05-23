@@ -19,10 +19,10 @@ void swap(int *arr, int i, int j){
 // bubble sort
 void bubble_sort(int *arr, int n){
     int i, j; 
-    for (i=0; i<n; i++){
-        for (j=i; j<n; j++){
-            if (*(arr+j) < *(arr+i)){
-                swap(arr, i, j);
+    for (i=0; i<n-1; i++){
+        for (j=0; j<n-i-1; j++){
+            if (*(arr+j) > *(arr+j+1)){
+                swap(arr, j, j+1);
             }
         }
     }
