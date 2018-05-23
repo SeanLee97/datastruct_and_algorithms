@@ -8,6 +8,7 @@ using namespace std;
  * 冒泡排序、插入排序、选择排序、快速排序、堆排、归并排序
  */
 
+// 交换两值
 void swap(int *arr, int i, int j){
     int t;
     t = *(arr+j);
