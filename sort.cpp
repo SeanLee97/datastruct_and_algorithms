@@ -5,7 +5,7 @@ using namespace std;
 
 /**
  * c++实现常用排序算法
- * 冒泡排序、插入排序、选择排序、快速排序、堆排、归并排序
+ * 冒泡排序、插入排序、选择排序、希尔排序、快速排序、堆排、归并排序
  */
 
 // 交换两值
@@ -44,18 +44,32 @@ void insert_sort(int *arr, int n){
 
 // select sort
 void select_sort(int *arr, int n){
-    int i, j, minimum, min_idx;
+    int i, j, min_idx;
     for (i=0; i<n; i++){
-        minimum = *(arr+i);
         min_idx = i;
         for (j=i+1; j<n; j++){
-            if (*(arr+j) < minimum){
-                minimum = *(arr+j);
+            if (*(arr+j) < *(arr+min_idx)){
                 min_idx = j;
             }
         }
         // swap
         swap(arr, i, min_idx);
+    }
+}
+
+// shell sort
+void shell_sort(int *arr, int n){
+    int d, i, j;
+    d = n/2;
+    while (d>0){
+        for (i=0; i<n; i++){
+            for (j=i; j>=0; j-=d){
+                if (j-d > 0 && *(arr+j) < *(arr+j-d)){
+                    swap(arr, j, j-d);
+                }
+            }
+        }
+        d /= 2;
     }
 }
 
@@ -111,8 +125,8 @@ void heap_sort(int *arr, int n){
         build_maxheap(arr, i, n);
     }
     for (i=n-1; i>=0; i--){
-        build_maxheap(arr, 0, i);
         swap(arr, 0, i);
+        build_maxheap(arr, 0, i);
     }
 }
 
@@ -192,6 +206,11 @@ int main(void){
     cout<<"选择"<<endl;
     lst = arr;
     select_sort(lst, n);
+    echo(lst, n);
+
+    cout<<"希尔排序"<<endl;
+    lst = arr;
+    shell_sort(lst, n);
     echo(lst, n);
 
     cout<<"快排"<<endl;
