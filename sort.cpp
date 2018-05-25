@@ -43,6 +43,29 @@ void insert_sort(int *arr, int n){
     }
 }
 
+// 折半插入排序
+// 比较次数复杂度为O(nlogn)但是移动次数为O(n^2)故时间复杂度还是O(n^2)
+void bi_insert_sort(int *arr, int n){
+    int low, high, mid, i, j, privot;
+    for (i=1; i<n; i++){
+        low = 0;
+        high = i;
+        privot = *(arr+i);
+        while (low < high){
+            mid = (low + high)/2;
+            if (*(arr+mid) > privot){
+                high = mid - 1;
+            }else{
+                low = mid + 1;
+            }
+        }
+        for (j=i-1; j>=low; j--){
+            *(arr+j+1) = *(arr+j);
+        }
+        *(arr+low) = privot;
+    }
+}
+
 // select sort
 void select_sort(int *arr, int n){
     int i, j, min_idx;
@@ -65,7 +88,7 @@ void shell_sort(int *arr, int n){
     while (d>0){
         for (i=0; i<n; i++){
             for (j=i; j>=0; j-=d){
-                if (j-d > 0 && *(arr+j) < *(arr+j-d)){
+                if (j-d >= 0 && *(arr+j) < *(arr+j-d)){
                     swap(arr, j, j-d);
                 }
             }
@@ -214,46 +237,53 @@ void echo(int *arr, int n){
     cout<<endl;
 }
 
+int* create_arr(){
+    int *arr = new int[4];
+    *(arr+0) = 2;
+    *(arr+1) = 1;
+    *(arr+2) = 4;
+    *(arr+3) = 3;
+    return arr;
+}
 int main(void){
-    int arr[] = {2, 1, 4, 3};
-    int n = LEN(arr);
+    int *arr = create_arr();
     int *lst;
-    
+    int n = 4; 
     cout<<"原始数组"<<endl;
     echo(arr, n);
     
     cout<<"冒泡"<<endl;
-    lst = arr;
+    lst = create_arr();
     bubble_sort(lst, n);
     echo(lst, n);
     
     cout<<"插入"<<endl;
-    lst = arr;
-    insert_sort(lst, n);
+    lst = create_arr();
+    bi_insert_sort(lst, n);
     echo(lst, n);
-     
+ 
     cout<<"选择"<<endl;
-    lst = arr;
+    lst = create_arr();
     select_sort(lst, n);
     echo(lst, n);
 
     cout<<"希尔排序"<<endl;
-    lst = arr;
+    lst = create_arr();
     shell_sort(lst, n);
     echo(lst, n);
 
     cout<<"快排"<<endl;
-    lst = arr;
+    lst = create_arr();
     quick_sort_iter(lst, 0, n-1);
     echo(lst, n);
 
     cout<<"堆排"<<endl;
-    lst = arr;
+    lst = create_arr();
     heap_sort(lst, n);
     echo(lst, n);
     
     cout<<"归并"<<endl;
-    lst = arr;
+    lst = create_arr();
     merge_sort(lst, 0, n-1);
     echo(lst, n);
     
