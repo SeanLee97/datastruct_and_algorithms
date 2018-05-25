@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstdlib>
+#include <stack>
 #define LEN(arr) sizeof(arr)/sizeof(arr[0])
 using namespace std;
 
@@ -90,11 +91,39 @@ int partition(int *arr, int low, int high){
     return store_idx;
 }
 
-int quick_sort(int *arr, int low, int high){
+void quick_sort(int *arr, int low, int high){
     if (low < high){
         int mid = partition(arr, low, high);
         quick_sort(arr, low, mid-1);
         quick_sort(arr, mid+1, high);
+    }
+}
+
+// 非递归方式实现快排
+struct qdata{
+    int low, high;
+};
+void quick_sort_iter(int *arr, int low, int high){
+    stack<qdata>S;
+    qdata q;
+    int mid;
+    q.low = low;
+    q.high = high;
+    S.push(q);
+    while (!S.empty()){
+        q = S.top();
+        S.pop();
+        low = q.low;
+        high = q.high;
+        while (low < high){
+            mid = partition(arr, low, high);
+            if (mid < high){
+                q.low = mid + 1;
+                q.high = high;
+                S.push(q);    // 排当前位置的右部
+            }
+            high = mid - 1; // 排当前位置的左部
+        }
     }
 }
 
@@ -215,7 +244,7 @@ int main(void){
 
     cout<<"快排"<<endl;
     lst = arr;
-    quick_sort(lst, 0, n-1);
+    quick_sort_iter(lst, 0, n-1);
     echo(lst, n);
 
     cout<<"堆排"<<endl;
