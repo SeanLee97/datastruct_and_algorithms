@@ -76,22 +76,25 @@ void select_sort(int *arr, int n){
                 min_idx = j;
             }
         }
-        // swap
-        swap(arr, i, min_idx);
+        if (min_idx != i)
+            // swap
+            swap(arr, i, min_idx);
     }
 }
 
 // shell sort
 void shell_sort(int *arr, int n){
-    int d, i, j;
+    int d, i, j, k;
     d = n/2;
     while (d>0){
-        for (i=0; i<n; i++){
-            for (j=i; j>=0; j-=d){
-                if (j-d >= 0 && *(arr+j) < *(arr+j-d)){
-                    swap(arr, j, j-d);
-                }
+        for (i=d; i<n; i++){
+            k = *(arr+i);
+            j = i-d;
+            while (j>=0 && *(arr+j) > k){
+                *(arr+j+d) = *(arr+j);
+                j -= d;
             }
+            *(arr+j+d) = k;
         }
         d /= 2;
     }
@@ -172,7 +175,8 @@ void build_maxheap(int *arr, int root, int n){
 
 void heap_sort(int *arr, int n){
     int i;
-    for (i=n-1; i>=0; i--){
+    i = n / 2;
+    for (; i>=0; i--){
         // 构建初始大顶堆
         build_maxheap(arr, i, n);
     }
