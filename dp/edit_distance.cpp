@@ -41,7 +41,15 @@ int dynamic_programming(string str1, string str2, int m, int n){
             }
         }
     }
-    return *(*(dp+m-1)+n-1);
+    
+    int result = *(*(dp+m-1)+n-1);
+
+    // 清理堆空间
+    for (i=0; i<m; i++){
+        delete[] *(dp+i);
+    }
+    delete []dp;
+    return result;
 }
 
 int main(void){

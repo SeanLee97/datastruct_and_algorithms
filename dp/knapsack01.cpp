@@ -35,7 +35,14 @@ int dynamic_programming(int n, int Vt[N], int Wt[N], int W){
                 *(*(dp+i)+j) = max(Vt[i]+*(*(dp+i-1)+j-Wt[i]), *(*(dp+i-1)+j));
         }
     }
-    return *(*(dp+n-1)+W);
+
+    int result = *(*(dp+n-1)+W);
+    // 清理堆空间
+    for (i=0; i<n; i++){
+        delete[] *(dp+i);
+    }
+    delete []dp;
+    return result;
 }
 
 int main(void){
