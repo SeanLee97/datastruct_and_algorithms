@@ -7,7 +7,7 @@ def LIS(arr, m):
     # bottom-up
     for i in range(1, m):
         for j in range(i):
-            # j->i 代表过去的值
+            # 将当前值和之前的值依次比较看看递增大小为多少
             if arr[j] < arr[i] and dp[j]+1 > dp[i]:
                 dp[i] = dp[j] + 1
     maximum = 0
@@ -15,6 +15,6 @@ def LIS(arr, m):
         maximum = max(maximum, dp[i])
     return maximum
 
-arr = [3, 10, 2, 5, 20]
+arr = [5, 2, 11, 2, 20]
 print(LIS(arr, len(arr))) 
                 

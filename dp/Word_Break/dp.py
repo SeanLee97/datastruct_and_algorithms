@@ -12,11 +12,12 @@ def f(inp):
     for i in range(n+1):
         if dp[i]:
             j = 1
-            while i+j-1 < n: 
+            while i+j-1 < n:
                 if inp[i:i+j] in vocab:
                     dp[i+j] = True
+                    print(inp[i:i+j], i+j)
                 j += 1
     return dp[n]
 
-inp = 'ilikesamsungandicecream'
+inp = 'ilikesamsung'
 print(f(inp))

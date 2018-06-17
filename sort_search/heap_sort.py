@@ -24,7 +24,7 @@ def heap_sort(lst):
     n = len(lst) -1
     # 建立大顶堆
     # 作用是将一个数组改造成一个最大堆，为了保证下标i的结点之后的结点都能满足最大堆的性质，采用自下而上（数组中从后往前）的调用max_heap()函数来往上构建大顶堆
-    for i in range(n, -1, -1):
+    for i in range(n//2, -1, -1):
         max_heap(lst, n, i)
     
     # 从底往上（对应数组的从后往前）抽取元素,其中lst[0]必然是堆中最大元素，每次都将lst[i]和lst[0]位置互换，接着再重建大顶堆
@@ -34,6 +34,6 @@ def heap_sort(lst):
         # 重建大顶堆
         max_heap(lst, i, 0)
 
-lst = [ 12, 11, 13, 5, 6, 7]
+lst = [2, 1, 4, 3]
 heap_sort(lst)
 print(lst)

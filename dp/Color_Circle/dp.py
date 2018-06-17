@@ -3,6 +3,7 @@
 
 import math
 
+
 def f(m, n):
     dp = [0] * (n+1)
     dp[0] = m
