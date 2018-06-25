@@ -1,11 +1,11 @@
 # !/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# 时间复杂度 Olog(n)
+# 时间复杂度 O(n^2)
 
 def insert_sort(lst):
     n = len(lst)
-    for i in range(n):
+    for i in range(1, n):
         k = lst[i]  # 新选择的数
         j = i-1
         while j>=0 and k < lst[j]:  # 和之前的数比较，放在合适的位置
