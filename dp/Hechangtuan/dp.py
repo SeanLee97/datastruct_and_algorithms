@@ -21,26 +21,28 @@ dpmin[i][j] = min(dpmin[i][j], min(tmax, tmin))
 """
 
 def solution(n, arr, k, d):
-    dpmax = [[0 for x in range(k+1)] for x in range(n+1)]
-    dpmin = [[0 for x in range(k+1)] for x in range(n+1)]
+    dpmax = [[0 for x in range(k)] for x in range(n)]
+    dpmin = [[0 for x in range(k)] for x in range(n)]
     # 初始化最大最小
     for i in range(n):
-        dpmax[i][1] = arr[i]
-        dpmin[i][1] = arr[i]
-
-    for i in range(1, n+1):
-        for j in range(1, k+1):
-            t = 0 if i-d-1 < 0 else i-d-1
-            for x in range(i-1, t, -1):
+        dpmax[i][0] = arr[i]
+        dpmin[i][0] = arr[i]
+    
+    res = 0
+    for i in range(n):
+        for j in range(1, k):
+            for x in range(i-1, max(0, i-d)-1, -1):
                 #print(i, x, j-1)
                 #print(dpmax[x][j-1], arr[i-1])
 
-                tmpmax = dpmax[x][j-1]*arr[i-1]
-                tmpmin = dpmin[x][j-1]*arr[i-1]
+                tmpmax = dpmax[x][j-1]*arr[i]
+                tmpmin = dpmin[x][j-1]*arr[i]
                 dpmax[i][j] = max(dpmax[i][j], max(tmpmax, tmpmin))
                 dpmin[i][j] = min(dpmin[i][j], min(tmpmax, tmpmin))
+        res = max(res, dpmax[i][k-1])
 
-    return dpmax[n][k]
+    return res
+
 if __name__ == '__main__':
     n = 3
     arr = [7, -4, 7]
