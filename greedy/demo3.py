@@ -9,9 +9,9 @@
 
 def solution(lst):
     lst.sort()
-    n = len(lst) 
+    n = len(lst)
     go = 0
-    for i in range(1, lst):
+    for i in range(1, n):
         go += lst[i]    # 去的时间
         back += lst[0]  # 最快的回来的时间
     return go + back

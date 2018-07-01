@@ -15,22 +15,19 @@ class Solution(object):
         service = [0]*s   # 服务点每个客户等待时间
         waitsum = [0]*s   # 服务点顾客等待时间总和
         n = len(client)
-        j = 0 # 记录服务点ID
         for i in range(n):
+            j = i % s
             service[j] += client[i]
             waitsum[j] += service[j]
-            j+=1
-            if j == s:
-                j = 0
         avgtime = sum(waitsum) / n    # 每个客户平均等待时间
         return avgtime
 
 if __name__ == '__main__':
     so = Solution()
     lst = [56, 12, 1, 99, 1000, 234, 33, 55, 99, 812]  # 用户等待时间
-    s = 2   # 服务点个数
-    t = so.greedy(lst, s) 
+    s = 3   # 服务点个数
+    t = so.greedy(lst, s)
     print(t)
-        
+
 
 

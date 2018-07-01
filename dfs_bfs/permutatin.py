@@ -21,7 +21,7 @@ def dfs(lst, n, tmp, res, visit):
 def dfs1(lst, n, tmp, res, visit):
     if len(tmp) == n:
         res.append(tmp.copy())
-        return 
+        return
     i = 0
     while i < n:
         if not visit[i]:
@@ -44,4 +44,4 @@ def solution(lst):
     dfs1(lst, n, tmp, res, visit)
     print(res)
 
-solution([1, 1, 2])
+solution([1, 1])

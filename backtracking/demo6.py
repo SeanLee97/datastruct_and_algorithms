@@ -8,7 +8,7 @@
 class Solution(object):
     def __init__(self):
         self.res = 0
-    
+
     def dfs(self, n, cur, A, visit):
         # curr 代表当前行
         if cur == n:
