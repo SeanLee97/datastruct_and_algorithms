@@ -15,7 +15,7 @@ class Solution(object):
         global table
         k = int(number[0])
         for i in range(len(table[k])):
-            self.dfs(number[1:], tmp+[table[k][i]], res) 
+            self.dfs(number[1:], tmp+[table[k][i]], res)
 
     def numbers(self, number):
         tmp = []

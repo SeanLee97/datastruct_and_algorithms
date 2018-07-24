@@ -1,6 +1,8 @@
 # !/usr/bin/env python
 # -*- coding: utf-8 -*-
-
+"""
+给一个集合和一个指定数，求解集合的子集和是否可以等于指定数
+"""
 def f(arr, n, t):
     if n == 0 and t != 0:
         return False
@@ -13,8 +15,8 @@ def f(arr, n, t):
     # 有两种状态：1. 选择当前数 2.不选当前数
     # 使得两种状态做与运算，条件会一直为真到结束
     return f(arr, n-1, t) or f(arr, n-1, t-arr[n-1])
-    
+
 
 lst = [3, 34, 4, 12, 5, 2]
 t = 18
-print(f(lst, len(lst), t)) 
+print(f(lst, len(lst), t))

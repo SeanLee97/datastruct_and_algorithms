@@ -13,7 +13,7 @@ class Solution(object):
             if not visit[i]:
                 # 保存现场
                 visit[i] = True
-                tmp.append(arr[i])  
+                tmp.append(arr[i])
                 self.dfs(arr, n, tmp, res, visit)
                 # 恢复现场
                 tmp.pop()
@@ -32,5 +32,5 @@ class Solution(object):
 
 if __name__ == '__main__':
     s = Solution()
-    arr = s.permutation([1, 2, 3]) 
+    arr = s.permutation([1, 2, 3])
     print(arr)

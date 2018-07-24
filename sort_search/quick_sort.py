@@ -12,7 +12,7 @@ def quick_sort(lst, low, high):
 
 def partition(lst, low, high):
     store_idx = low
-    # 选取最后一个元素作为基准，可能会出现最坏情况 
+    # 选取最后一个元素作为基准，可能会出现最坏情况
     # pivot = lst[high]
     rand_pivot_idx = random.randint(low, high)
     lst[rand_pivot_idx], lst[high] = lst[high], lst[rand_pivot_idx]
@@ -22,7 +22,7 @@ def partition(lst, low, high):
             '''
             t = lst[j]
             lst[j] = lst[store_idx]
-            lst[store_idx] = t 
+            lst[store_idx] = t
             '''
             # 以下python语句可以一步完成两值的交换
             lst[store_idx], lst[j] = lst[j], lst[store_idx]
@@ -32,8 +32,6 @@ def partition(lst, low, high):
     return store_idx
 
 
-lst = [10, 80, 30, 90, 40, 50, 70]
+lst = [2, 1, 4, 3, 1, 1]
 quick_sort(lst, 0, len(lst)-1)
 print(lst)
-         
-        

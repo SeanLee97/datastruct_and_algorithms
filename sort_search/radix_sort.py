@@ -23,7 +23,6 @@ def count_sort(lst, base):
 
     # 将数据存储到tmp中
     for i in range(n-1, -1, -1):
-        v = lst[i]
         pos = bucket[(lst[i]//base)%10]
         tmp[pos-1] = lst[i]
         bucket[(lst[i]//base)%10] -= 1

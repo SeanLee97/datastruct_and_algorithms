@@ -11,12 +11,12 @@ def solution(S, N):
     dp  = [0]*(N+1)
     dp[0] = 1
     for i in range(n): # 先从每一种面值出发
-        for j in range(N+1):
+        for j in range(1, N+1):
             if j >= S[i]:  #大于当前面值就选
                 dp[j] += dp[j-S[i]]
     return dp[N]
 
 if __name__ == '__main__':
     S = [1, 2, 5, 10, 20, 50]
-    N = 5
+    N = 125
     print("totoal solutions", solution(S, N))

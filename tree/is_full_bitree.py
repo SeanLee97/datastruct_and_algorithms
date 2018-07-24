@@ -1,6 +1,9 @@
 # !/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""
+判断一棵树是否满二叉树
+"""
 class Node(object):
     def __init__(self, data, left=None, right=None):
         self.data = data
@@ -13,7 +16,7 @@ def check_full(root):
     if root.left == None and root.right != None:
         return False
     return check_full(root.left) and check_full(root.right)
-    
+
 
 tree = Node(1, Node(2, None, Node(5)), Node(3))
 print(check_full(tree))
