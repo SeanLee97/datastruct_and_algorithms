@@ -15,6 +15,7 @@ class LRUCache(object):
         if k in self.store:
             self.key.remove(k)
             self.key = [k] + self.key
+            self.store[k] = v
         elif len(self.store.keys()) == self.capacity:
             last_key = self.key.pop()
             del self.store[last_key]
