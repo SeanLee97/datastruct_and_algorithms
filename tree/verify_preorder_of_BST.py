@@ -14,7 +14,7 @@ def f(lst):
         if v < root:
             return False
         while len(stack) > 0 and stack[-1] < v:
-            # v做右子树
+            # v 做右子树
             root = stack.pop()  # 栈顶出栈作为根
         stack.append(v)
     return True
