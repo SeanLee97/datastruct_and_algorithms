@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <stack>
+#include <vector>
 #define LEN(arr) sizeof(arr)/sizeof(arr[0])
 using namespace std;
 
@@ -19,7 +20,7 @@ void swap(int *arr, int i, int j){
 
 // bubble sort
 void bubble_sort(int *arr, int n){
-    int i, j; 
+    int i, j;
     for (i=0; i<n-1; i++){
         for (j=0; j<n-i-1; j++){
             if (*(arr+j) > *(arr+j+1)){
@@ -105,7 +106,7 @@ int partition(int *arr, int low, int high){
     //  选择随机数作为哨兵
     int randint = rand()%high + low;
     swap(arr, randint, high);
-    
+
     int store_idx=low, i, j, privot= *(arr+high);
     for (i=low; i<high; i++){
         if (*(arr+i) < privot){
@@ -233,6 +234,94 @@ void merge_sort(int *arr, int low, int high){
     }
 }
 
+/*
+ * 上面的排序都是比较排序，下面的是非比较排序
+ * 桶排序
+ * 计数排序
+ * 基数排序
+ * 他们的特点是用类哈希的方式，用空间来换取时间
+ */
+int get_max(int *arr, int n){
+    int m = *(arr+0);
+    int i=1;
+    for (; i<n; i++){
+        if (*(arr+i) > m)
+            m = *(arr+i);
+    }
+    return m;
+}
+
+// 桶排序
+void bucket_sort(int *arr, int n){
+    int maximum = get_max(arr, n);
+    int *bucket = new int[maximum+1];
+    vector<int>tmp;
+    int i, j;
+    for (i=0; i<maximum; i++){
+        bucket[i] = 0;
+    }
+
+    // 分桶
+    for (i=0; i<n; i++){
+        bucket[*(arr+i)]++;
+    }
+
+    // 取结果
+    for (i=0; i<maximum+1; i++){
+        for (j=0; j<bucket[i]; j++){
+            tmp.push_back(i);
+        }
+    }
+
+    // 排序
+    for (i=0; i<n; i++){
+        *(arr+i) = tmp[i];
+    }
+    // 释放堆空间
+    delete[] bucket;
+}
+
+// 计数排序
+int count_sort(int *arr, int n){
+    int maximum = get_max(arr, n);
+    int *tmp = new int[n];
+    int *bucket = new int[maximum+1];
+    int i, v, pos;
+
+    // 初始化
+    for (i=0; i<maximum+1; i++){
+        bucket[i] = 0;
+    }
+    for (i=0; i<n; i++){
+        tmp[i] = 0;
+    }
+
+    // 分桶
+    for (i=0; i<n; i++){
+        bucket[*(arr+i)]++;
+    }
+    // 求第i个元素前面有多少个元素，也就是确定第i个元素的位置
+    for (i=1; i<maximum+1; i++){
+        bucket[i] += bucket[i-1];
+    }
+
+    // 根据位置求tmp（排序）
+    for (i=0; i<n; i++){
+        v = *(arr+i);
+        pos = bucket[v];   // 位置
+        tmp[pos-1] = v;
+        bucket[v] -= 1;
+    }
+
+    // 替换掉元数组的值
+    for (i=0; i<n; i++){
+        *(arr+i) = tmp[i];
+    }
+
+    delete[] bucket;
+    delete[] tmp;
+}
+
 // 输出
 void echo(int *arr, int n){
     for (int i=0; i<n; i++){
@@ -247,25 +336,26 @@ int* create_arr(){
     *(arr+1) = 1;
     *(arr+2) = 4;
     *(arr+3) = 3;
+    *(arr+4) = 1;
     return arr;
 }
 int main(void){
     int *arr = create_arr();
     int *lst;
-    int n = 4; 
+    int n = 5;
     cout<<"原始数组"<<endl;
     echo(arr, n);
-    
+
     cout<<"冒泡"<<endl;
     lst = create_arr();
     bubble_sort(lst, n);
     echo(lst, n);
-    
+
     cout<<"插入"<<endl;
     lst = create_arr();
     bi_insert_sort(lst, n);
     echo(lst, n);
- 
+
     cout<<"选择"<<endl;
     lst = create_arr();
     select_sort(lst, n);
@@ -285,11 +375,21 @@ int main(void){
     lst = create_arr();
     heap_sort(lst, n);
     echo(lst, n);
-    
+
     cout<<"归并"<<endl;
     lst = create_arr();
     merge_sort(lst, 0, n-1);
     echo(lst, n);
-    
+
+    cout<<"==== 非比较排序 ===="<<endl;
+    cout<<"桶排序"<<endl;
+    lst = create_arr();
+    bucket_sort(lst, n);
+    echo(lst, n);
+
+    cout<<"计数排序"<<endl;
+    lst = create_arr();
+    count_sort(lst, n);
+    echo(lst, n);
     return 0;
 }
