@@ -42,7 +42,7 @@ int depth_iter(BTNode* pRoot){
     while (p!=NULL || !S1.empty()){
         while (p!=NULL){
             S1.push(p);
-            S2.push(curr_depth);    
+            S2.push(curr_depth);
             p = p->left;
             curr_depth++;
         }
@@ -140,44 +140,34 @@ void postorder(BTNode* pRoot){
         postorder(pRoot->right);
         cout<<pRoot->data<<" ";
     }
-} 
+}
 
 // 非递归方式，较前两种负责，需要添加标志位
-struct sdata{
-    BTNode* q;
-    int tag;
-};
-
+typedef pair<BTNode*, bool> node;
 void postorder_iter(BTNode* pRoot){
     if (pRoot != NULL){
         BTNode* p;
         p = pRoot;
-        sdata* sd;
         int tag;
-        stack<sdata*>S;
+        stack<node>S;
+        node t;
         do {
             while (p != NULL){
-                sd = new sdata;
-                sd->q = p;
-                sd->tag = 0;
-                S.push(sd);
+                S.push(make_pair(p, false));
                 p = p->left;
             }
-            sd = S.top();
-            S.pop();
-            p = sd->q;
-            tag = sd->tag;
+            t = S.top(); S.pop();
+            p = t.first;
+            tag = t.second;
             if (tag == 0){
-                sd->q = p;
-                sd->tag = 1;
-                S.push(sd);
+                S.push(make_pair(p, true));
                 p = p->right;
             }else{
                 cout<<p->data<<" ";
                 p = NULL; // 访问后必须置NULL，否则将陷入死循环
             }
         }while (p != NULL || !S.empty());
-    } 
+    }
 }
 
 /**
@@ -315,4 +305,4 @@ int main(void){
     cout<<endl;
 
     return 0;
-} 
+}
