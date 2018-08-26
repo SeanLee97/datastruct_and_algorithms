@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 
+"""
+统计矩阵中团的个数以及团中最大个数是多少，
+"""
 def dfs(matrix, i, j, m, n):
     if i<0 or j<0 or i>=m or j>=n or matrix[i][j] <= 0:
         return 0
     matrix[i][j] = -1 # visited
-    count = 1 + (dfs(matrix, i+1, j, m, n) + dfs(matrix, i-1, j, m, n) + 
+    count = 1 + (dfs(matrix, i+1, j, m, n) + dfs(matrix, i-1, j, m, n) +
     	dfs(matrix, i, j-1, m, n) + dfs(matrix, i, j+1, m, n))
     return count
 
