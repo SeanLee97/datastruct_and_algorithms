@@ -1,60 +1,68 @@
-# !/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# Attention: the code only support python3.
+"""
+性质:
 
-from typing import Tuple
+（1）根节点不包含字符，除根节点外的每个节点只包含一个字符。
+（2）从根节点到某一个节点，路径上经过的字符连接起来，为该节点对应的字符串。
+（3）每个节点的所有子节点包含的字符串不相同。
 
+应用
+（1）词频统计
+（2）比直接用hash节省空间
+（3）搜索提示
+
+"""
 class TrieNode(object):
-    def __init__(self, char: str):
+    def __init__(self, char):
         self.char = char
         self.children = []
-        self.finished = False
-        self.counter = 1
+        self.end = False
+        self.counter = 1  # 统计词频
 
 class Trie(object):
     def __init__(self):
-        super(Trie, self).__init__()
         self.root = TrieNode('*')
-    
-    def add(self, word: str):
+
+    def add(self, word):
         node = self.root
         for char in word:
-            char_exists = False
+            flag = False # is new node
             for child in node.children:
                 if child.char == char:
-                    char_exists = True
+                    flag = True
                     child.counter += 1
                     node = child
                     break
-            if not char_exists:
-                n_node = TrieNode(char)
-                node.children.append(n_node)
-                node = n_node
-        node.finished = True
+            if not flag:
+                new_node = TrieNode(char)
+                node.children.append(new_node)
+                node = new_node
 
-    def find(self, prefix: str) -> Tuple[bool, int]:
+        node.end = True
+
+    def find(self, word):
         node = self.root
-        if not node.children:
+        if len(node.children) == 0:
             return False, 0
-        for char in prefix:
-            not_found = True
+        for char in word:
+            flag = False # notfound
             for child in node.children:
                 if child.char == char:
-                    not_found = False
+                    flag = True
                     node = child
                     break
-            if not_found: 
-                return False, 0
+            if not flag:
+                return None, 0
         return True, node.counter
 
 if __name__ == '__main__':
     t = Trie()
     t.add('hello')
-    t.add('helloworld')
+    t.add('hello')
     t.add('hack')
     t.add('ball')
     t.add('back')
     
     # find
-    print(t.find('back'))
+    print(t.find('hello'))
