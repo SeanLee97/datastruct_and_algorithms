@@ -32,6 +32,7 @@ class KNN(object):
         }
 
     def distance(self, p1, p2):
+        
         if p1 is None or p2 is None:
             return 0
 
